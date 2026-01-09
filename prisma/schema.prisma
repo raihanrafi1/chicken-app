@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  role      String   // STAFF, OWNER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Menu {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  image       String?
+  category    String
+  variants    Variant[]
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Variant {
+  id            Int      @id @default(autoincrement())
+  name          String
+  priceModifier Float
+  menuId        Int
+  menu          Menu     @relation(fields: [menuId], references: [id])
+}
+
+model Discount {
+  id         Int      @id @default(autoincrement())
+  name       String
+  percentage Float
+  startDate  DateTime
+  endDate    DateTime
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  customerName  String
+  totalAmount   Float
+  status        String      // PENDING, COMPLETED, CANCELLED
+  items         OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  order     Order    @relation(fields: [orderId], references: [id])
+  menuId    Int
+  menu      Menu     @relation(fields: [menuId], references: [id])
+  quantity  Int
+  price     Float    // Price at the time of order
+}
