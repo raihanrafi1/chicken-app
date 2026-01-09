@@ -8,6 +8,7 @@ interface Order {
     id: number
     customerName: string
     totalAmount: number
+    status: string
     createdAt: string
     items: Array<{
         id: number

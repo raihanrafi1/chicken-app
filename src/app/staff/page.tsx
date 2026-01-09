@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Link from 'next/link'
 
+interface Order {
+    id: number
+    status: string
+}
+
 export default function StaffDashboard() {
     const router = useRouter()
     const [loading, setLoading] = useState(true)
@@ -41,13 +46,13 @@ export default function StaffDashboard() {
                 fetch('/api/staff/discounts'),
             ])
 
-            const orders = await ordersRes.json()
+            const orders: Order[] = await ordersRes.json()
             const menu = await menuRes.json()
             const discounts = await discountsRes.json()
 
             setStats({
                 totalOrders: orders.length || 0,
-                pendingOrders: orders.filter((o: any) => o.status === 'PENDING').length || 0,
+                pendingOrders: orders.filter((o) => o.status === 'PENDING').length || 0,
                 totalMenuItems: menu.length || 0,
                 activeDiscounts: discounts.length || 0,
             })
