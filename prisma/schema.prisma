@@ -38,6 +38,8 @@ model Variant {
   priceModifier Float
   menuId        Int
   menu          Menu     @relation(fields: [menuId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Discount {
@@ -46,6 +48,8 @@ model Discount {
   percentage Float
   startDate  DateTime
   endDate    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Order {
