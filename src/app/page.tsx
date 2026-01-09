@@ -1,4 +1,5 @@
 'use client'
+// Triggering fresh build on Vercel to resolve 404 issue
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
