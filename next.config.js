@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    // Trigger deployment for DB connection retry
+};
 
 module.exports = nextConfig
