@@ -1,0 +1,56 @@
+﻿
+> chicken-app@0.1.0 build
+> prisma generate && next build
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+
+Γ£ö Generated Prisma Client (v5.22.0) to .\node_modules\@prisma\client in 111ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+
+   Γû▓ Next.js 16.0.6 (Turbopack)
+   - Environments: .env
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 10.0s
+   Running TypeScript ...
+   Collecting page data using 7 workers ...
+   Generating static pages using 7 workers (0/24) ...
+   Generating static pages using 7 workers (6/24) 
+   Generating static pages using 7 workers (12/24) 
+   Generating static pages using 7 workers (18/24) 
+ Γ£ô Generating static pages using 7 workers (24/24) in 1104.1ms
+   Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ ╞Æ /api/auth/login
+Γö£ ╞Æ /api/auth/logout
+Γö£ ╞Æ /api/auth/session
+Γö£ ╞Æ /api/menu
+Γö£ ╞Æ /api/orders
+Γö£ ╞Æ /api/owner/analytics
+Γö£ ╞Æ /api/owner/export
+Γö£ ╞Æ /api/staff/discounts
+Γö£ ╞Æ /api/staff/menu
+Γö£ ╞Æ /api/staff/orders
+Γö£ Γùï /cart
+Γö£ Γùï /checkout
+Γö£ Γùï /login
+Γö£ ╞Æ /menu/[id]
+Γö£ Γùï /order-success
+Γö£ Γùï /owner
+Γö£ Γùï /owner/reports
+Γö£ Γùï /staff
+Γö£ Γùï /staff/discounts
+Γö£ Γùï /staff/menu
+Γöö Γùï /staff/orders
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+
