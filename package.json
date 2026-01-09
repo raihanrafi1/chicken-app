@@ -1,6 +1,6 @@
 {
   "name": "chicken-app",
-  "description": "Chicken Ordering System - Stable Version 15.1.4",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
