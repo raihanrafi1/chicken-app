@@ -8,26 +8,30 @@ export interface Session {
     role: string
 }
 
-// Simple in-memory session store (for demo purposes)
-const sessions = new Map<string, Session>()
-
+// Database session store
 export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
     return bcrypt.compare(password, hashedPassword)
 }
 
 export async function createSession(userId: number, username: string, role: string): Promise<string> {
-    const sessionId = crypto.randomUUID()
-    sessions.set(sessionId, { userId, username, role })
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 1 week
+
+    const session = await prisma.session.create({
+        data: {
+            userId,
+            expiresAt,
+        }
+    })
 
     const cookieStore = await cookies()
-    cookieStore.set('session', sessionId, {
+    cookieStore.set('session', session.id, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        maxAge: 60 * 60 * 24 * 7, // 1 week
+        maxAge: 7 * 24 * 60 * 60, // 1 week
     })
 
-    return sessionId
+    return session.id
 }
 
 export async function getSession(): Promise<Session | null> {
@@ -36,8 +40,20 @@ export async function getSession(): Promise<Session | null> {
 
     if (!sessionId) return null
 
-    const session = sessions.get(sessionId)
-    return session || null
+    const session = await prisma.session.findUnique({
+        where: { id: sessionId },
+        include: { user: true }
+    })
+
+    if (!session || new Date() > session.expiresAt) {
+        return null
+    }
+
+    return {
+        userId: session.userId,
+        username: session.user.username,
+        role: session.user.role
+    }
 }
 
 export async function deleteSession(): Promise<void> {
@@ -45,7 +61,11 @@ export async function deleteSession(): Promise<void> {
     const sessionId = cookieStore.get('session')?.value
 
     if (sessionId) {
-        sessions.delete(sessionId)
+        try {
+            await prisma.session.delete({ where: { id: sessionId } })
+        } catch (error) {
+            // Ignore if session already deleted
+        }
     }
 
     cookieStore.delete('session')
