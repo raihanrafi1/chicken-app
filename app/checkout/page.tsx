@@ -11,13 +11,14 @@ export default function CheckoutPage() {
     const [customerName, setCustomerName] = useState('')
     const [loading, setLoading] = useState(false)
     const [paymentMethod, setPaymentMethod] = useState('cash')
+    const [isSuccess, setIsSuccess] = useState(false)
 
-    // Redirect if cart is empty
+    // Redirect if cart is empty (unless order is successful)
     useEffect(() => {
-        if (cart.length === 0) {
+        if (cart.length === 0 && !isSuccess) {
             router.push('/cart')
         }
-    }, [cart.length, router])
+    }, [cart.length, router, isSuccess])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -37,6 +38,7 @@ export default function CheckoutPage() {
 
             if (res.ok) {
                 const data = await res.json()
+                setIsSuccess(true) // Prevent redirect to cart
                 clearCart()
                 router.push(`/order/${data.orderId}`)
             } else {
