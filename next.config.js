@@ -1,6 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // Trigger deployment for DB connection retry
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'loremflickr.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com',
+            }
+        ],
+    },
 };
 
 module.exports = nextConfig
