@@ -2,7 +2,7 @@
 import { PrismaClient } from '@prisma/client'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import QRCode from 'react-qr-code'
+import QRCodeDisplay from '@/components/QRCodeDisplay'
 import Navbar from '@/components/Navbar'
 
 const prisma = new PrismaClient()
@@ -79,13 +79,8 @@ export default async function OrderReceiptPage({ params }: { params: Promise<{ i
                     {/* QR Code Section */}
                     <div className="bg-gray-50 p-8 rounded-2xl border-2 border-dashed border-gray-200 text-center mb-8">
                         <p className="text-sm text-gray-500 mb-4 font-semibold uppercase tracking-wider">Scan to Pay</p>
-                        <div className="bg-white p-4 rounded-xl shadow-sm inline-block">
-                            <QRCode
-                                value={qrData}
-                                size={200}
-                                style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                                viewBox={`0 0 256 256`}
-                            />
+                        <div className="bg-white p-4 rounded-xl shadow-sm inline-block w-full max-w-[200px]">
+                            <QRCodeDisplay value={qrData} size={200} />
                         </div>
                         <p className="text-xs text-gray-400 mt-4">Accepts All E-Wallets (QRIS)</p>
                     </div>
