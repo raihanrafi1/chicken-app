@@ -40,7 +40,7 @@ export async function GET() {
                 description: 'Ayam goreng renyah dengan bumbu rahasia',
                 price: 25000,
                 category: 'Fried Chicken',
-                image: 'https://loremflickr.com/800/600/fried,chicken?random=1'
+                image: '/fried-chicken.png'
             },
             {
                 id: 2,
@@ -48,7 +48,7 @@ export async function GET() {
                 description: 'Ayam goreng dengan bumbu pedas level maksimal',
                 price: 28000,
                 category: 'Fried Chicken',
-                image: 'https://loremflickr.com/800/600/spicy,chicken,food?random=2'
+                image: '/spicy-chicken.png'
             },
             {
                 id: 3,
@@ -56,7 +56,7 @@ export async function GET() {
                 description: 'Ayam bakar dengan saus spesial',
                 price: 30000,
                 category: 'Grilled Chicken',
-                image: 'https://loremflickr.com/800/600/grilled,chicken,food?random=3'
+                image: '/grilled-chicken.png'
             },
             {
                 id: 4,
@@ -64,7 +64,7 @@ export async function GET() {
                 description: 'Burger dengan daging ayam crispy',
                 price: 22000,
                 category: 'Burgers',
-                image: 'https://loremflickr.com/800/600/chicken,burger?random=4'
+                image: '/chicken-burger.png'
             },
             {
                 id: 5,
@@ -72,7 +72,7 @@ export async function GET() {
                 description: 'Nasi dengan ayam goreng, sambal, dan lalapan',
                 price: 35000,
                 category: 'Rice Bowl',
-                image: 'https://loremflickr.com/800/600/indonesian,food,chicken?random=5'
+                image: '/chicken-rice.jpg'
             }
         ]
 
