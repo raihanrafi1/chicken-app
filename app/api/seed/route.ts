@@ -32,28 +32,31 @@ export async function GET() {
             },
         })
 
-        // SEED MENU ITEMS
+        // SEED MENU ITEMS with Real Images
         const menus = [
             {
                 id: 1,
                 name: 'Ayam Goreng Crispy',
                 description: 'Ayam goreng renyah dengan bumbu rahasia',
                 price: 25000,
-                category: 'Fried Chicken'
+                category: 'Fried Chicken',
+                image: 'https://loremflickr.com/800/600/fried,chicken?random=1'
             },
             {
                 id: 2,
                 name: 'Ayam Pedas',
                 description: 'Ayam goreng dengan bumbu pedas level maksimal',
                 price: 28000,
-                category: 'Fried Chicken'
+                category: 'Fried Chicken',
+                image: 'https://loremflickr.com/800/600/spicy,chicken,food?random=2'
             },
             {
                 id: 3,
                 name: 'Ayam Bakar',
                 description: 'Ayam bakar dengan saus spesial',
                 price: 30000,
-                category: 'Grilled Chicken'
+                category: 'Grilled Chicken',
+                image: 'https://loremflickr.com/800/600/grilled,chicken,food?random=3'
             },
             {
                 id: 4,
@@ -61,7 +64,7 @@ export async function GET() {
                 description: 'Burger dengan daging ayam crispy',
                 price: 22000,
                 category: 'Burgers',
-                image: '/chicken-burger.png'
+                image: 'https://loremflickr.com/800/600/chicken,burger?random=4'
             },
             {
                 id: 5,
@@ -69,14 +72,14 @@ export async function GET() {
                 description: 'Nasi dengan ayam goreng, sambal, dan lalapan',
                 price: 35000,
                 category: 'Rice Bowl',
-                image: '/chicken-rice.png'
+                image: 'https://loremflickr.com/800/600/indonesian,food,chicken?random=5'
             }
         ]
 
         for (const menu of menus) {
             await prisma.menu.upsert({
                 where: { id: menu.id },
-                update: {},
+                update: { image: menu.image },
                 create: menu
             })
         }
